@@ -6,9 +6,14 @@
         <span class="fw-bold" style="display: block; float: right; font-size: 24px; height: 40px; line-height: 40px;">무비트립</span>
       </div>
       <div style="line-height: 40px; padding-right: .5rem;">
-        <router-link to="/">커뮤니티</router-link> |
-        <router-link to="/login">로그인</router-link> |
-        <router-link to="/signup">회원가입</router-link>
+        <span v-if="isLoggedIn">
+          <router-link to="/">커뮤니티</router-link> |
+          <router-link to="#" @click.native="logout()">로그아웃</router-link>
+        </span>
+        <span v-else>
+          <router-link to="/login">로그인</router-link> |
+          <router-link to="/signup">회원가입</router-link>
+        </span>
       </div>
     </div>
     <GoogleMap style="position: absolute; width:100%; height:100%; top: 0; left: 0; z-index: -1;">
@@ -22,11 +27,34 @@
 </template>
 <script>
 import GoogleMap from './components/GoogleMap.vue'
+// import { mapState } from 'vuex'
 
 export default {
   components: {
     GoogleMap
   },
+  created: function () {
+    if (localStorage.getItem('jwt')) {
+      this.$store.dispatch('userLogin')
+    }
+  },
+  methods: {
+    logout: function () {
+      this.$store.dispatch('userLogout')
+      localStorage.removeItem('jwt')
+      localStorage.removeItem('jwt-refresh')
+      this.$router.push({name: 'Login'})
+    }
+  },
+  computed: {
+    // ...mapState([
+    //   'isLoggedIn'
+    // ]),
+    isLoggedIn: function () {
+      console.log(this.$store.state.isLoggedIn)
+      return this.$store.state.isLoggedIn
+    }
+  }
 }
 </script>
 <style>

@@ -9,14 +9,40 @@
         <form action="">
           <div>
             <label for="">아이디</label>
-            <input type="text" placeholder="아이디를 입력해주세요." autofocus>
+            <input 
+              type="text" 
+              placeholder="아이디를 입력해주세요." 
+              autofocus
+              v-model="credentials.username"
+            >
+          </div>
+          <div>
+            <label for="">닉네임</label>
+            <input 
+              type="text" 
+              placeholder="닉네임을 입력해주세요."
+              v-model="credentials.nickname"
+            >
           </div>
           <div>
             <label for="">비밀번호</label>
-            <input type="password" placeholder="비밀번호를 입력해주세요.">
+            <input
+              type="password" 
+              placeholder="비밀번호를 입력해주세요."
+              v-model="credentials.password"
+            >
           </div>
           <div>
-            <button type="button">로그인</button>
+            <label for="">비밀번호 확인</label>
+            <input 
+              type="password" 
+              placeholder="비밀번호 확인"
+              v-model="credentials.passwordConfirmation"
+              @keyup.enter="signup(credentials)"
+            >
+          </div>
+          <div>
+            <button type="button" @click="signup(credentials)">회원가입</button>
           </div>
         </form>
 
@@ -25,3 +51,44 @@
     </div>
   </div>
 </template>
+
+<script>
+import axios from 'axios'
+
+export default {
+  name: 'Signup',
+  data: function () {
+    return {
+      credentials: {
+        username: '',
+        nickname: '',
+        password: '',
+        passwordConfirmation: '',
+      }
+    }
+  },
+  methods: {
+    signup: function (credentials) {
+
+      const SERVER_URL = process.env.VUE_APP_SERVER_URL
+
+      axios({
+        method: 'post',
+        url: `${SERVER_URL}/accounts/signup/`,
+        data: credentials,
+      })
+        .then(res => {
+          console.log(res)
+          this.$router.push({ name: 'Login' })
+        })
+        .catch(err => {
+          console.log(err)
+        })
+    }
+  }
+}
+</script>
+
+<style>
+
+</style>
