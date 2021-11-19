@@ -4,6 +4,7 @@ import Home from '../views/Home.vue'
 import Login from '../views/Login.vue'
 import Signup from '../views/Signup.vue'
 import Country from '../views/Country.vue'
+import Community from '../views/Community.vue'
 
 Vue.use(VueRouter)
 
@@ -22,6 +23,11 @@ const routes = [
     path: '/signup',
     name: 'Signup',
     component: Signup,
+  },
+  {
+    path: '/community',
+    name: 'Community',
+    component: Community,
   },
   {
     path: '/country/:countryNum',
