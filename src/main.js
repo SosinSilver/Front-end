@@ -6,9 +6,11 @@ import store from './store'
 
 Vue.config.productionTip = false
 
+const GOOGLE_API_KEY = process.env.VUE_APP_GOOGLE_API_KEY
+
 Vue.use(VueGoogleMaps, {
   load: {
-    key: 'AIzaSyB_AQ9AXrs9EaqjVf3xousiVBJmoH-u1-Y',
+    key: GOOGLE_API_KEY,
     libraries: 'places', 
   },
 })
