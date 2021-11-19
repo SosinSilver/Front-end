@@ -1,11 +1,11 @@
 <template>
-  <div>
+  <div style="height: calc(100% - 40px)">
     <GmapMap
       :center='center'
       :zoom='3'
       :options='options'
-      map-type-id="roadmap"
-      style='width:100%; height: 100vh;'
+      map-type-id="terrain"
+      style='width:100%; height: 100%;'
     >
       <GmapMarker
         v-for="m in markers"

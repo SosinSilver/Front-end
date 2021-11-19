@@ -17,7 +17,7 @@
         </span>
       </div>
     </div>
-    <GoogleMap style="position: absolute; width:100%; height:100%; top: 0; left: 0; z-index: -1;">
+    <GoogleMap class="google-map">
     </GoogleMap>
 
     <transition name="fade">
@@ -94,5 +94,13 @@ export default {
 }
 .fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
   opacity: 0;
+}
+
+.google-map {
+  position: absolute; 
+  width:100%; 
+  top: 40px; 
+  left: 0; 
+  z-index: -1;
 }
 </style>

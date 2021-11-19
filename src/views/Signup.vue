@@ -103,6 +103,7 @@ export default {
         })
         .catch(err => {
           console.log(err)
+          alert('입력값이 올바르지 않습니다.')
         })
     }
   }

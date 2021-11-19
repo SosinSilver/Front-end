@@ -9,7 +9,7 @@
             <div style="text-align: left;">
               <label for="id">아이디</label>
             </div>
-            <input 
+            <input
               type="text" 
               placeholder="아이디를 입력해주세요." 
               autofocus
@@ -90,6 +90,7 @@ export default {
         })
         .catch(err => {
           console.log(err)
+          alert('아이디 혹은 비밀번호가 올바르지 않습니다.')
         })
     }
   }
