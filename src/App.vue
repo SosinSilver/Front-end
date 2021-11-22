@@ -52,7 +52,7 @@ export default {
     //   'isLoggedIn'
     // ]),
     isLoggedIn: function () {
-      console.log(this.$store.state.isLoggedIn)
+      // console.log(this.$store.state.isLoggedIn)
       return this.$store.state.isLoggedIn
     }
   }

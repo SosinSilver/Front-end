@@ -25,19 +25,6 @@ export default {
   data() {
     return {
       center: { lat: 37, lng: 127 },
-      markers: [
-        { position: { lat: 37, lng: 127 }, 
-          country_id: 1,
-          getDraggable: false, },
-        { position: { lat: 20, lng: 93 },
-          country_id: 2 },
-        { position: { lat: 12, lng: 82 },
-          country_id: 3 },
-        { position: { lat: 82, lng: 13 },
-          country_id: 4 },
-        { position: { lat: 75, lng: 35 }, 
-          country_id: 5 },
-      ],
       options: {
         fullscreenControl: false,
         styles: [
@@ -138,7 +125,23 @@ export default {
     clickPin: function(m) {
       this.center=m.position
       this.$router.push({name:'Country', params: { countryNum: m.country_id }})
+    },
+  },
+  computed: {
+    markers: function() {
+      if(!this.$store.state.countryList){
+        return 
+      }
+      return this.$store.state.countryList.map(element => {
+        return {
+          country_id:element.id, 
+          position: {lat: element.lat, lng: element.lng},
+        }
+      });
     }
   },
+  created: function() {
+    this.$store.dispatch('getCountries')
+  }
 }
 </script>
