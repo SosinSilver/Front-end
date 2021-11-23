@@ -5,7 +5,7 @@
       <div class="w-25 p-2" v-for="movie in recommendList" :key="movie.pk">
         <img :src="`${posterUrl}${movie.fields.poster_path}`" alt="" class="d-block w-100 rounded"
         @click="selectMovie(movie.pk)">
-        {{ movie.fields.title }}
+        <span style="font-size: 14px;">{{ movie.fields.title }}</span>
       </div>
     </div>
   </div>

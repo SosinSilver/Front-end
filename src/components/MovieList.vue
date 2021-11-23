@@ -58,7 +58,17 @@ export default {
       }
       this.$store.dispatch('getMovies', this.country.id)
     },
+    getRatingStars: function () {
+      setTimeout(() => {
+        const ratingStars = [...document.getElementsByClassName("rating__star")]
+        this.executeRating(ratingStars)
+        console.log(this.movieList.length, ratingStars.length)
+      }, 500);
+    },
     executeRating: function (stars) {
+      if(!stars){
+        return 
+      }
       const starClassActive = "rating__star fas fa-star";
       const starClassInactive = "rating__star far fa-star";
 
@@ -110,15 +120,9 @@ export default {
       }
       return this.$store.state.movieList
     },
-    ratingStars: function() {
-      if (!this.$store.state.movieList){
-        return
-      }
-      return [...document.getElementsByClassName("rating__star")]
-    } 
   },
-  mounted() {
-    this.executeRating(this.ratingStars)
+  mounted: function () {
+    this.getRatingStars()
   },
   created: function () {
     this.getMovies()
