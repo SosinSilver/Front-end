@@ -3,10 +3,10 @@
     <div id="nav">
       <div style="padding-left: .5rem;">
         <img alt="Vue logo" src="./assets/logo.png" width="40" height="40">
-        <span class="fw-bold" style="display: block; float: right; font-size: 24px; height: 40px; line-height: 40px;">무비트립</span>
+        <router-link to="/" class="fw-bold" style="color: black; display: block; float: right; font-size: 24px; height: 40px; line-height: 40px;">무비트립</router-link>
       </div>
       <div style="line-height: 40px; padding-right: .5rem;">
-        <router-link to="/">메인페이지</router-link> |
+        <router-link to="/">홈</router-link> |
         <span v-if="isLoggedIn">
           <router-link to="/community">커뮤니티</router-link> |
           <router-link to="#" @click.native="logout()">로그아웃</router-link>

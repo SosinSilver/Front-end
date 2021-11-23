@@ -33,6 +33,11 @@ const routes = [
     path: '/country/:countryNum',
     name: 'Country',
     component: Country,
+  },
+  {
+    path: '/country/:countryNum',
+    name: 'Country',
+    component: Country,
   }
 ]
 
