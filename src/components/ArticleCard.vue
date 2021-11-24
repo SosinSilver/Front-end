@@ -166,7 +166,7 @@ export default {
       }
     },
     deleteArticle: function (article_id) {
-      if(confirm('댓글을 삭제하시겠습니까?')){
+      if(confirm('게시글을 삭제하시겠습니까?')){
         // console.log(this.idx, '여기는 아티클카드')
         this.$store.dispatch('deleteArticle', { article_id, idx: this.idx })
       }
