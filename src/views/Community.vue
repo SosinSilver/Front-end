@@ -19,6 +19,7 @@
                   class="px-2 w-100 rounded" 
                   style="border: none; font-size: 14px;" 
                   v-model.trim="hashtag"
+                  @keyup.enter="createArticle"
                   autofocus
                 >
               </div>

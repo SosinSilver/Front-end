@@ -55,6 +55,11 @@ export default {
       // console.log(this.$store.state.isLoggedIn)
       return this.$store.state.isLoggedIn
     }
+  },
+  mounted: function() {
+    if (!this.$store.state.isLoggedIn) {
+      this.$router.push({ name: 'Tutorial' })
+    }
   }
 }
 </script>

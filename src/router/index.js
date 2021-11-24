@@ -5,6 +5,7 @@ import Login from '../views/Login.vue'
 import Signup from '../views/Signup.vue'
 import Country from '../views/Country.vue'
 import Community from '../views/Community.vue'
+import Tutorial from '../views/Tutorial.vue'
 
 Vue.use(VueRouter)
 
@@ -12,7 +13,12 @@ const routes = [
   {
     path: '/',
     name: 'Home',
-    component: Home
+    component: Home,
+  },
+  {
+    path: '/tutorial',
+    name: 'Tutorial',
+    component: Tutorial,
   },
   {
     path: '/login',

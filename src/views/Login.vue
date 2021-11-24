@@ -45,7 +45,7 @@
             </p>
           </div>
           <div id="social-icons" class="d-flex px-4 mb-3">
-            <img src="../assets/google.png" alt="google-logo" width="40px">
+            <img src="../assets/google.png" alt="google-logo" width="40px" class="pointer">
           </div>
         </form>
         
