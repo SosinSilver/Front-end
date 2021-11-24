@@ -22,7 +22,7 @@
         <div class="fw-bold" style="font-size: 15px;">
           {{ country.thumbnail_title }}
         </div>
-        <div class="mt-1 w-100">
+        <div class="mt-1 w-100 text-start">
           <p style="text-overflow: ellipsis; font-size: 10px;">{{ country.thumbnail_content }}</p>
         </div>
       </div>
