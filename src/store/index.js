@@ -55,7 +55,7 @@ export default new Vuex.Store({
       state.articleList.unshift(newArticleItem)
     },
     CREATE_COMMENT: function (state, { commentItem, idx }) {
-      console.log(idx)
+      // console.log(idx)
       state.articleList[idx].fields.comments.unshift(commentItem)
     },
     GET_ARTICLES: function (state, articleList) {
@@ -77,7 +77,7 @@ export default new Vuex.Store({
       }
       
       state.articleList[idx].fields.is_liked = !state.articleList[idx].fields.is_liked
-    }
+    },
   },
   actions: {
     userLogin: function ({ commit }) {
@@ -257,7 +257,7 @@ export default new Vuex.Store({
     },
     createComment: function ({ commit }, { commentItem, article_id, idx }) {
       const jwtToken = localStorage.getItem('jwt')
-      console.log(commentItem, article_id, idx)
+      // console.log(commentItem, article_id, idx)
       axios({
         method:'post',
         url: `${API_URL}/community/article/${article_id}/comment/create/`,
@@ -328,6 +328,27 @@ export default new Vuex.Store({
         })
         .catch(err => {
           console.log(err)
+        })
+    },
+    updateArticle: function ({ commit }, { article_id, idx, articleItem }) {
+      const jwtToken = localStorage.getItem('jwt')
+
+      // console.log(article_id, idx)
+      axios({
+        method:'put',
+        url: `${API_URL}/community/article/${article_id}/update/`,
+        headers: {Authorization: `Bearer ${jwtToken}`},
+        data: articleItem,
+      })
+        .then(res => {
+          console.log(res, 'This is res.data')
+          idx
+          commit
+          // commit('UPDATE_ARTICLE', idx)
+        })
+        .catch(err => {
+          console.log(err)
+          alert('작성자만 수정할 수 있습니다.')
         })
     }
   },

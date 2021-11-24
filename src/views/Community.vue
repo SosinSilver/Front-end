@@ -89,16 +89,20 @@ export default {
       }
     },
     createArticle: function () {
-      if (this.content && this.hashtag) {
-        const articleItem = {
-          movieTitle: this.hashtag,
-          content: this.content,
+      if(confirm('글을 작성하시겠습니까?')){
+        if (this.content && this.hashtag) {
+          const articleItem = {
+            movieTitle: this.hashtag,
+            content: this.content,
+          }
+          this.hashtag = ''
+          this.content = ''
+          this.$store.dispatch('createArticle', articleItem)
+        } else {
+          alert('빈 값이 있는 것 같아요! 확인해주세요.')
         }
-        this.hashtag = ''
-        this.content = ''
-        this.$store.dispatch('createArticle', articleItem)
       } else {
-        alert('입력이 올바르지 않습니다!')
+        alert('네 알겠습니당 !')
       }
     },
     getArticles: function (page) {

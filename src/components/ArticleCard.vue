@@ -9,18 +9,33 @@
           <i class="fas fa-user-circle me-2" style="font-size: 40px;"></i>
           <div class="d-flex flex-column text-start">
             <span style="font-size: 15px">{{ article.fields.nickname }}</span>
-            <span style="font-size: 12px">{{ article.fields.movie_title }}</span>
+            <span v-if="mode" style="font-size: 12px">{{ article.fields.movie_title }}</span>
+            <input v-else 
+              type="text" 
+              v-model="article.fields.movie_title"
+              class="px-2 w-100 rounded" 
+              style="border: none; font-size: 14px;"
+            >
           </div>
         </div>
         <!-- 삭제 버튼 -->
         <div v-if="article.fields.nickname == $store.state.nickname">
-          <!-- <i class="fas fa-pencil-alt pe-2 pointer" style="font-size: 13px"></i> -->
-          <i class="fas fa-trash-alt pointer" style="font-size: 13px" @click="deleteArticle(article.pk, idx)"></i>
+          <i v-if="mode" class="fas fa-pencil-alt pe-2 pointer" style="font-size: 13px;" @click="changeMode"></i>
+          <i v-else class="fas fa-check pe-2 pointer" style="font-size: 13px;" @click="updateArticle(article.pk)"></i>
+          <i v-if="mode" class="fas fa-trash-alt pointer" style="font-size: 13px;" @click="deleteArticle(article.pk, idx)"></i>
+          <i v-else class="fas fa-times pointer" style="font-size: 13px;" @click="cancelUpdate"></i>
         </div>
       </div>
       <!-- 내용 -->
       <div class="px-3 text-start">
-        <p>{{ article.fields.content }}</p>
+        <p v-if="mode">{{ article.fields.content }}</p>
+        <textarea 
+          v-else 
+          v-model="article.fields.content"
+          maxlength="200"
+          class="rounded my-textarea w-100 p-2"
+        >
+        </textarea>
       </div>
       <!-- 좋아요 아이콘, 댓글 아이콘 -->
       <div class="d-flex px-3">
@@ -97,6 +112,9 @@ export default {
     return {
       content: '',
       isFull: false,
+      mode: true,
+      originalMT: '',
+      originalContent: '',
     }
   },
   props: {
@@ -115,6 +133,7 @@ export default {
   methods: {
     createComment: function (article_id) {
       // console.log(article_id)
+      console.log('댓글 왜 두번??')
       if (this.content) {
         const commentItem = {
           content: this.content
@@ -125,15 +144,35 @@ export default {
           article_id,
           idx: this.idx
         }
-        this.content = ''
         this.$store.dispatch('createComment', payload)
-      } else {
-        alert('댓글을 입력해주세요!')
+        this.content = ''
+      }
+      else {
+        alert('댓글을 입력해주세요 !')
+      }
+    },
+    updateArticle: function (article_id) {
+      if(confirm('정말 수정하시겠습니까?')){
+        const articleItem = {
+          movie_title: this.article.fields.movie_title,
+          content: this.article.fields.content
+        }
+        this.$store.dispatch('updateArticle', { article_id, idx: this.idx, articleItem })
+        this.mode = true;
+      }
+      else {
+        // 원복
+        this.cancelUpdate()
       }
     },
     deleteArticle: function (article_id) {
-      // console.log(this.idx, '여기는 아티클카드')
-      this.$store.dispatch('deleteArticle', { article_id, idx: this.idx })
+      if(confirm('댓글을 삭제하시겠습니까?')){
+        // console.log(this.idx, '여기는 아티클카드')
+        this.$store.dispatch('deleteArticle', { article_id, idx: this.idx })
+      }
+      else {
+        return
+      }
     },
     deleteComment: function (comment_pk, comment_idx, article_idx) {
       this.$store.dispatch('deleteComment', { comment_pk, comment_idx, article_idx })
@@ -145,6 +184,16 @@ export default {
     },
     likeArticle: function (article_pk) {
       this.$store.dispatch('likeArticle',  { article_pk, idx: this.idx })
+    },
+    changeMode: function () {
+        this.mode = false;
+        this.originalMT = this.article.fields.movie_title
+        this.originalContent = this.article.fields.content
+    },
+    cancelUpdate: function () {
+        this.article.fields.movie_title = this.originalMT
+        this.article.fields.content = this.originalContent
+        this.mode = true;
     }
   },
   computed: {

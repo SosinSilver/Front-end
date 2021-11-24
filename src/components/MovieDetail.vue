@@ -2,7 +2,7 @@
   <div class="bg-white p-3 text-start" style="color: black;">
     <div v-if="movieInfo" class="d-flex">
       <div class="w-75 me-3">
-        <h2 class="d-inline">{{ movieInfo.title }}</h2>
+        <h2 class="d-inline" style="color: black;">{{ movieInfo.title | truncateTitle }}</h2>
         <p class="d-inline">{{ movieInfo.released_date | getYear }}</p>
 
         <div class="float-end">
@@ -69,6 +69,14 @@ export default {
     },
     round: function (value) {
       return Number(value).toFixed(1)
+    },
+    truncateTitle: function (value) {
+      if(value.length > 16) {
+        return value.slice(0, 16) + '...'
+      }
+      else{
+        return value
+      }
     }
   }
 }
