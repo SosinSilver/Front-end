@@ -80,7 +80,7 @@ export default new Vuex.Store({
     },
   },
   actions: {
-    userLogin: function ({ commit }) {
+    userLogin: function ({ commit, dispatch }) {
       const jwtToken = localStorage.getItem('jwt')
       
       axios({
@@ -91,6 +91,7 @@ export default new Vuex.Store({
         .then(res => {
           console.log(res.data.nickname)
           commit('USER_LOGIN', res.data.nickname)
+          dispatch('getCountries')
         })
         .catch(err => {
           console.log(err)
