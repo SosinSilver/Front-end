@@ -31,7 +31,7 @@ const routes = [
     component: Signup,
   },
   {
-    path: '/community',
+    path: '/board',
     name: 'Community',
     component: Community,
   },

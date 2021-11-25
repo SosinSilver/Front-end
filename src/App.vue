@@ -8,7 +8,7 @@
       <div style="line-height: 40px; padding-right: .5rem;">
         <router-link to="/">홈</router-link> |
         <span v-if="isLoggedIn">
-          <router-link to="/community">커뮤니티</router-link> |
+          <router-link to="/board">커뮤니티</router-link> |
           <router-link to="#" @click.native="logout()">로그아웃</router-link>
         </span>
         <span v-else>

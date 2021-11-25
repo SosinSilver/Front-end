@@ -83,13 +83,11 @@ export default {
   h2 {
     font-weight: 700;
     color: white;
-    opacity: 100% !important;
   }
 
   h4 {
     font-weight: 700;
     color: white;
-    opacity: 100% !important;
   }
 
   .bg-dark-opacity {
